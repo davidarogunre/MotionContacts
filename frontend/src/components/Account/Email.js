@@ -12,12 +12,12 @@ import {
   } from "@chakra-ui/react";
   import '@fontsource/open-sans/400.css'
 
-  function Email({loginEmail, setLoginEmail}) {
+  function Email({loginEmail, setLoginEmail, validateEmail}) {
     return (
       <Box fontFamily="Open Sans" width="450px" height="500px" border="0.12rem solid whitesmoke" borderRadius="5px" margin="50px auto 0 auto">
         <Image src={logo} width="100px" margin="40px 0 0 170px"/>
         <Text margin="5px 0 0 172px" fontSize="2rem">Sign in</Text>
-        <Text margin="15px 0 0 125px" fontSize="1.2rem">Use your Google Account</Text>
+        <Text margin="15px 0 0 125px" fontSize="1.2rem">Use your Motion Account</Text>
         <Box width="80%" margin="0 auto">
         
       <FormControl variant="floating" id="first-name" width="50%" margin="30px 20px 0 0">
@@ -26,7 +26,7 @@ import {
             <Box display="flex" justifyContent="space-between" width="370px" marginTop="130px">
             <Button colorScheme='blue' variant='ghost' borderRadius="3px">Create Account</Button>
             
-            <Button colorScheme='blue' borderRadius="5px" variant='solid'>Next</Button>
+            <Button colorScheme='blue' borderRadius="5px" variant='solid' onClick={()=>validateEmail(loginEmail)}>Next</Button>
             </Box>
       </FormControl>
       </Box>

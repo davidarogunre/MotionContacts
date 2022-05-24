@@ -11,9 +11,15 @@ import { useState } from 'react';
 function App() {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
-
+  const [isEmailVerified, setIsEmailVerified] = useState(false)
   //handle email validation
-  const validateEmail = email => {};
+  const validateEmail = email => {
+    if(email.length > 5 && email.endsWith(".com")){
+      setIsEmailVerified(true)
+    }else{
+      setIsEmailVerified(false)
+    }
+  };
   const validatePassword = password => {};
   return (
     <ChakraProvider theme={theme}>
@@ -28,6 +34,9 @@ function App() {
                 setLoginEmail={setLoginEmail}
                 loginPassword={loginPassword}
                 setLoginPassword={setLoginPassword}
+                isEmailVerified={isEmailVerified}
+                setIsEmailVerified={setIsEmailVerified}
+                validateEmail={validateEmail}
               />
             }
           />
