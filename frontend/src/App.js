@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChakraProvider} from '@chakra-ui/react';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/Home/Home';
 import SigninPage from './components/Account/SigninPage';
 import ContactPage from './components/Contact/ContactPage';
@@ -12,6 +12,7 @@ function App() {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isEmailVerified, setIsEmailVerified] = useState(false)
+  const [isCurrentUser, setIsCurrentUser] = useState(false)
   //handle email validation
   const validateEmail = email => {
     if(email.length > 5 && email.endsWith(".com")){
@@ -25,7 +26,13 @@ function App() {
     <ChakraProvider theme={theme}>
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={
+            isCurrentUser ? (
+              <Navigate replace to="/" />
+            ) : (
+              <Navigate replace to="/signin" />
+            )
+          } />
           <Route
             path="/signin"
             element={
