@@ -13,7 +13,7 @@ import {
   } from "@chakra-ui/react";
   import '@fontsource/open-sans/400.css'
   import {useState} from 'react'
-  function Password({setIsEmailVerified, loginPassword, setLoginPassword}) {
+  function SigninPassword({setIsEmailVerified, loginPassword, setLoginPassword}) {
       const [passwordType, setPasswordType] = useState(true)
     return (
       <Box fontFamily="Open Sans" width="450px" height="500px" border="0.12rem solid whitesmoke" borderRadius="5px" margin="50px auto 0 auto">
@@ -21,7 +21,7 @@ import {
         <Text margin="5px 0 0 172px" fontSize="2rem">Sign in</Text>
         <Text margin="15px 0 0 125px" fontSize="1.2rem">Use your Motion Account</Text>
         <Box width="80%" margin="0 auto">
-      <FormControl variant="floating" id="first-name" width="50%" margin="30px 20px 0 0">
+      <FormControl variant="floating" id="password" width="50%" margin="30px 20px 0 0">
             
             <Input type={passwordType?"password":"text"} placeholder=" " borderRadius="3px" width="370px" padding="25px 15px" value={loginPassword} onChange={(e)=>setLoginPassword(e.target.value)}/>
 
@@ -37,4 +37,4 @@ import {
       </Box>
     )
   }
-export default Password
+export default SigninPassword

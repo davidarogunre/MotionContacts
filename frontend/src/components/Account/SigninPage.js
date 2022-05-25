@@ -5,8 +5,8 @@ import {
   FormLabel,
 } from '@chakra-ui/react';
 import '@fontsource/open-sans/400.css';
-import Email from './Email';
-import Password from './Password'
+import SigninEmail from './SigninEmail';
+import SigninPassword from './SigninPassword'
 
 function SigninPage({
   loginEmail,
@@ -15,14 +15,15 @@ function SigninPage({
   setLoginPassword,
   isEmailVerified,
   validateEmail,
-  setIsEmailVerified
+  setIsEmailVerified,
+  isEmailValid
 }) {
   return (
     isEmailVerified ? (
-    <Password setIsEmailVerified={setIsEmailVerified} loginPassword={loginPassword} setLoginPassword={setLoginPassword}/>
+    <SigninPassword setIsEmailVerified={setIsEmailVerified} loginPassword={loginPassword} setLoginPassword={setLoginPassword}/>
     ):
     (
-      <Email loginEmail={loginEmail} setLoginEmail={setLoginEmail} validateEmail={validateEmail}/>
+      <SigninEmail loginEmail={loginEmail} setLoginEmail={setLoginEmail} validateEmail={validateEmail} isEmailValid={isEmailValid}/>
     )
   
   )
