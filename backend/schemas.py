@@ -15,6 +15,7 @@ class Contact(ContactBase):
         orm_mode = True
 
 class UserBase(BaseModel):
+    name: str
     email: str
 
 class UserCreate(UserBase):

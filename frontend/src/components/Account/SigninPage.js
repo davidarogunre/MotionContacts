@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import '@fontsource/open-sans/400.css';
 import SigninEmail from './SigninEmail';
-import SigninPassword from './SigninPassword'
+import SigninPassword from './SigninPassword';
 
 function SigninPage({
   loginEmail,
@@ -16,17 +16,22 @@ function SigninPage({
   isEmailVerified,
   validateEmail,
   setIsEmailVerified,
-  isEmailValid
+  isEmailValid,
 }) {
-  return (
-    isEmailVerified ? (
-    <SigninPassword setIsEmailVerified={setIsEmailVerified} loginPassword={loginPassword} setLoginPassword={setLoginPassword}/>
-    ):
-    (
-      <SigninEmail loginEmail={loginEmail} setLoginEmail={setLoginEmail} validateEmail={validateEmail} isEmailValid={isEmailValid}/>
-    )
-  
-  )
+  return isEmailVerified ? (
+    <SigninPassword
+      setIsEmailVerified={setIsEmailVerified}
+      loginPassword={loginPassword}
+      setLoginPassword={setLoginPassword}
+    />
+  ) : (
+    <SigninEmail
+      loginEmail={loginEmail}
+      setLoginEmail={setLoginEmail}
+      validateEmail={validateEmail}
+      isEmailValid={isEmailValid}
+    />
+  );
 }
 
 export default SigninPage;
