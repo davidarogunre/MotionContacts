@@ -3,7 +3,7 @@ import {
   } from '@chakra-ui/react';
 function ContactPage() {
   return (
-    <div>ContactPage</div>
+    <Box></Box>
   )
 }
 
