@@ -17,6 +17,7 @@ function SigninPassword({
   setIsEmailVerified,
   loginPassword,
   setLoginPassword,
+  signin
 }) {
   const [passwordType, setPasswordType] = useState(true);
   return (
@@ -70,7 +71,7 @@ function SigninPassword({
               Back
             </Button>
 
-            <Button colorScheme="blue" borderRadius="5px" variant="solid">
+            <Button colorScheme="blue" borderRadius="5px" variant="solid" onClick={signin}>
               Next
             </Button>
           </Box>

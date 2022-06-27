@@ -24,12 +24,12 @@ function SignupPage({
   signupConfirmPassword,
   setSignupConfirmPassword,
   sendInfo,
-  postError
+ signupPostError
 }) {
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState(true);
-  return postError ? (
-    <p>{postError}</p>
+  return signupPostError ? (
+    <p>{signupPostError}</p>
   ) : (
     <Box
       fontFamily="Open Sans"

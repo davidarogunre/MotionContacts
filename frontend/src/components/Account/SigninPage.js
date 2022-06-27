@@ -17,12 +17,14 @@ function SigninPage({
   validateEmail,
   setIsEmailVerified,
   isEmailValid,
+  signin
 }) {
   return isEmailVerified ? (
     <SigninPassword
       setIsEmailVerified={setIsEmailVerified}
       loginPassword={loginPassword}
       setLoginPassword={setLoginPassword}
+      signin={signin}
     />
   ) : (
     <SigninEmail

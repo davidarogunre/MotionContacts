@@ -10,7 +10,7 @@ import {
 // import Home from './components/Home/Home';
 import SigninPage from './components/Account/SigninPage';
 import ContactPage from './components/Contact/ContactPage';
-// import CreateContact from './components/Contact/CreateContact';
+import CreateContact from './components/Contact/CreateContact';
 import Signup from './components/Account/SignupPage';
 import theme from './theme';
 import { useState } from 'react';
@@ -28,8 +28,9 @@ function App() {
   const [signupPassword, setSignupPassword] = useState('');
   const [signupConfirmPassword, setSignupConfirmPassword] = useState('');
   const [isSignupEmailValid, setIsSignupEmailValid] = useState(false);
-  const [postError, setPostError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [signupPostError, setSignupPostError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [signinPostError, setSigninPostError] = useState(null);
 
   //handle email validation
   const validateEmail = email => {
@@ -42,9 +43,12 @@ function App() {
     }
   };
   //Clear user input
-  const clearSignup = () =>{
-    
-  }
+  const clearSignup = () => {
+    setSignupName('');
+    setSignupEmail('');
+    setSignupPassword('');
+    setSignupConfirmPassword('');
+  };
   const validatePassword = (password, confirmpass) => {
     if (password === confirmpass) {
       return true;
@@ -52,38 +56,75 @@ function App() {
       return false;
     }
   };
-
-  const sendInfo = async  () => {
-    
+  const getCurrentUser = async () =>{
+    try{
+      let response = await fetch("http://127.0.0.1:8000/users/me")
+      if(!response.ok){
+        throw Error("There was a problem in logging in")
+      }
+      let data = await response.json()
+    }catch(err){
+      setSignupPostError(err.message);
+    }
+  }
+  const sendInfo = async () => {
+    setIsLoading(true);
     let data = {
       name: signupName,
       email: signupEmail,
-      password: signupPassword
-    }
+      password: signupPassword,
+    };
     let POST = {
-      method: "POST",
-      headers:{
-        "Content-Type":"application/json"
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data)
-    }
-      if (validatePassword(signupPassword, signupConfirmPassword)){
-      setIsLoading(true)
-      try{
-      let response = await fetch("http://127.0.0.1:8000/users", POST)
-      
-        if(!response.ok){
-          throw Error("There was a post error")
+      body: JSON.stringify(data),
+    };
+    if (validatePassword(signupPassword, signupConfirmPassword)) {
+      try {
+        let response = await fetch('http://127.0.0.1:8000/users', POST);
+
+        if (!response.ok) {
+          throw Error('There was a problem in logging in');
         }
-        console.log("worked")
-        setIsLoading(false)
-        setPostError(null)
-      }catch(err){
-        console.log(err.message)
+        setSignupPostError(null);
+        clearSignup();
+        setIsLoading(false);
+
+      } catch (err) {
+        setSignupPostError(err.message);
+        setIsLoading(false);
       }
     }
-    }
+  };
 
+  const signin = async () => {
+    setIsLoading(true);
+    let data = {
+      username: loginEmail,
+      password: loginPassword,
+    };
+    let POST = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+    try {
+      let response = await fetch('http://127.0.0.1:8000/login', POST);
+      if (!response.ok) {
+        throw Error(response.text);
+      }
+      console.log(response)
+      setIsLoading(false);
+      setSigninPostError(null);
+    } catch (err) {
+      setSignupPostError(err.message);
+      setIsLoading(false);
+    }
+  };
   return (
     <ChakraProvider theme={theme}>
       <Router>
@@ -102,16 +143,21 @@ function App() {
           <Route
             path="/signin"
             element={
-              <SigninPage
-                loginEmail={loginEmail}
-                setLoginEmail={setLoginEmail}
-                loginPassword={loginPassword}
-                setLoginPassword={setLoginPassword}
-                isEmailVerified={isEmailVerified}
-                setIsEmailVerified={setIsEmailVerified}
-                validateEmail={validateEmail}
-                isEmailValid={isEmailValid}
-              />
+              isLoading ? (
+                <Loading />
+              ) : (
+                <SigninPage
+                  loginEmail={loginEmail}
+                  setLoginEmail={setLoginEmail}
+                  loginPassword={loginPassword}
+                  setLoginPassword={setLoginPassword}
+                  isEmailVerified={isEmailVerified}
+                  setIsEmailVerified={setIsEmailVerified}
+                  validateEmail={validateEmail}
+                  isEmailValid={isEmailValid}
+                  signin={signin}
+                />
+              )
             }
           />
           <Route
@@ -130,17 +176,17 @@ function App() {
                   signupConfirmPassword={signupConfirmPassword}
                   setSignupConfirmPassword={setSignupConfirmPassword}
                   sendInfo={sendInfo}
-                  postError={postError}
+                  signupPostError={signupPostError}
                 />
               )
             }
           />
           <Route path="/contact/:id" element={<ContactPage />} />
-          <Route path="/newcontact" element />
+          <Route path="/newcontact" element={<CreateContact/>} />
         </Routes>
       </Router>
     </ChakraProvider>
   );
 }
 
-export default App
+export default App;
