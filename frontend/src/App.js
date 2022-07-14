@@ -29,7 +29,7 @@ function App() {
   const [signupConfirmPassword, setSignupConfirmPassword] = useState('');
   const [isSignupEmailValid, setIsSignupEmailValid] = useState(false);
   const [signupPostError, setSignupPostError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [signinPostError, setSigninPostError] = useState(null);
 
   //handle email validation
