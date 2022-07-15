@@ -1,16 +1,15 @@
-import { Spinner } from '@chakra-ui/react'
+import { Spinner, Center } from '@chakra-ui/react'
 function Loading() {
   return (
-    <div width="50%" margin="0 auto">
+    <Center width="100vw" height="100vh">
     <Spinner
   thickness='4px'
   speed='0.65s'
   emptyColor='gray.200'
   color='blue.500'
   size='xl'
-  
 />
-</div>
+</Center>
   )
 }
 

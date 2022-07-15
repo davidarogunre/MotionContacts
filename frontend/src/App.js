@@ -22,7 +22,7 @@ function App() {
   const [loginPassword, setLoginPassword] = useState('');
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isCurrentUser, setIsCurrentUser] = useState(false);
+  const [isCurrentUser, setIsCurrentUser] = useState(null);
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
@@ -108,18 +108,19 @@ function App() {
     let POST = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(`grant_type=&username=${data.username}&password=${data.password}&scope=&client_id=&client_secret=`)
     };
     try {
-      let response = await fetch('http://127.0.0.1:8000/login', POST);
+      let response = await fetch('http://127.0.0.1:8000/token', POST);
       if (!response.ok) {
         throw Error(response.text);
       }
       console.log(response)
       setIsLoading(false);
       setSigninPostError(null);
+      setIsCurrentUser(data)
     } catch (err) {
       setSignupPostError(err.message);
       setIsLoading(false);
