@@ -8,7 +8,8 @@ from database import SessionLocal, engine
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Union
 from passlib.hash import pbkdf2_sha256
-
+from dotenv import load_dotenv
+import os
 models.Base.metadata.create_all(bind=engine)
  
 app = FastAPI()
@@ -23,8 +24,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"]
 )
-
-SECRET_KEY = "470d3a57726b4c68258c18a4ad28de1c6e26be0eb0b198f1afcf82746b7b9c80"
+load_dotenv('.env')
+SECRET_KEY = os.environ.get("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -99,7 +100,8 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm=Depends(), db: S
     return {"access_token":access_token, "token_type":"bearer"}
 
 @app.get("/users/me", response_model=schemas.User)
-def read_users_me(current_user: schemas.User = Depends(get_current_user)):
+def read_users_me(current_user: schemas.User= Depends(get_current_user)):
+    print(current_user)
     return current_user
 @app.post('/users/', response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
