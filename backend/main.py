@@ -14,7 +14,7 @@ models.Base.metadata.create_all(bind=engine)
 import uvicorn
 app = FastAPI()
 origins = [
-    "https://motioncontacts.vercel.app/"
+    "*"
 ]
 
 app.add_middleware(
