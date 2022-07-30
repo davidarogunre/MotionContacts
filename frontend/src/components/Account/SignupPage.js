@@ -29,7 +29,7 @@ function SignupPage({
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState(true);
   return signupPostError ? (
-    <p color="red">{signupPostError}</p>
+    <p fontSize="50px">{signupPostError}</p>
   ) : (
     <Box
       fontFamily="Open Sans"

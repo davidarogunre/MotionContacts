@@ -113,7 +113,7 @@ function App() {
       body: JSON.stringify(`grant_type=&username=${data.username}&password=${data.password}&scope=&client_id=&client_secret=`)
     };
     try {
-      let response = await fetch('http://127.0.0.1:8000/token', POST);
+      let response = await fetch('https://motioncontacts-production.up.railway.app/token', POST);
       if (!response.ok) {
         throw Error(response.text);
       }
