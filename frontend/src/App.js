@@ -83,7 +83,7 @@ function App() {
     };
     if (validatePassword(signupPassword, signupConfirmPassword)) {
       try {
-        let response = await fetch('https://motioncontacts-production.up.railway.app/users', POST);
+        let response = await fetch('https://motioncontacts-production.up.railway.app/users/', POST);
 
         if (!response.ok) {
           throw Error('There was a problem in logging in');
