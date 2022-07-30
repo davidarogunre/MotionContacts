@@ -11,7 +11,7 @@ from passlib.hash import pbkdf2_sha256
 from dotenv import load_dotenv
 import os
 models.Base.metadata.create_all(bind=engine)
- 
+import uvicorn
 app = FastAPI()
 origins = [
     "http://localhost:3000"
@@ -109,3 +109,6 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     if db_user:
         raise HTTPException(status_code = 400, detail="Email already registered")
     return crud.create_user(db=db, user=user)
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=os.getenv("PORT", default=5000), log_level="info")
