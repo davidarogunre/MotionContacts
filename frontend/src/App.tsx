@@ -11,8 +11,8 @@ import {
 import SigninPage from './components/Account/SigninPage';
 import ContactPage from './components/Contact/ContactPage';
 import CreateContact from './components/Contact/CreateContact';
-import Signup from './components/Account/SignupPage';
-import theme from './theme';
+import Signup from './components/Account/SignupPage'
+import theme from './theme'
 import { useState } from 'react';
 
 import Loading from './components/Loading/Loading';
@@ -22,7 +22,8 @@ function App() {
   const [loginPassword, setLoginPassword] = useState('');
   const [isEmailVerified, setIsEmailVerified] = useState(false);
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isCurrentUser, setIsCurrentUser] = useState(null);
+  const [CurrentUser, setCurrentUser] = useState({});
+  const [isCurrentUser, setIsCurrentUser] = useState(false)
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
   const [signupPassword, setSignupPassword] = useState('');
@@ -49,7 +50,7 @@ function App() {
     setSignupPassword('');
     setSignupConfirmPassword('');
   };
-  const validatePassword = (password, confirmpass) => {
+  const validatePassword = (password:string, confirmpass:string) => {
     if (password === confirmpass) {
       return true;
     } else {
@@ -115,12 +116,12 @@ function App() {
     try {
       let response = await fetch('https://motioncontacts-production.up.railway.app/token', POST);
       if (!response.ok) {
-        throw Error(response.text);
+        throw Error("There was a problem in connecting");
       }
       console.log(response)
       setIsLoading(false);
       setSigninPostError(null);
-      setIsCurrentUser(data)
+      setCurrentUser(data)
     } catch (err) {
       setSignupPostError(err.message);
       setIsLoading(false);
@@ -131,7 +132,6 @@ function App() {
       <Router>
         <Routes>
           <Route
-            exact
             path="/"
             element={
               isCurrentUser ? (

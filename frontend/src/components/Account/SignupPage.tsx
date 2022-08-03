@@ -1,3 +1,4 @@
+import React from 'react'
 import logo from './googlelogo.png';
 import {
   FormControl,
@@ -29,7 +30,7 @@ function SignupPage({
   const navigate = useNavigate();
   const [passwordType, setPasswordType] = useState(true);
   return signupPostError ? (
-    <p fontSize="50px">{signupPostError}</p>
+    <p>{signupPostError}</p>
   ) : (
     <Box
       fontFamily="Open Sans"

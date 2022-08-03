@@ -1,7 +1,6 @@
+import React from 'react'
 import Navbar from './Navbar'
-import {
-  Box
-} from '@chakra-ui/react';
+
 function Home() {
   return (
     <div>Home</div>
