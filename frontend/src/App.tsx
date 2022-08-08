@@ -21,7 +21,6 @@ function App() {
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [isEmailValid, setIsEmailValid] = useState(true);
   const [CurrentUser, setCurrentUser] = useState({});
   const [isCurrentUser, setIsCurrentUser] = useState(false)
   const [signupName, setSignupName] = useState('');
@@ -34,15 +33,14 @@ function App() {
   const [signinPostError, setSigninPostError] = useState(null);
 
   //handle email validation
-  const validateEmail = email => {
-    if (email.length > 5 && email.endsWith('.com')) {
-      setIsEmailVerified(true);
-      setIsEmailValid(true);
-    } else {
-      setIsEmailVerified(false);
-      setIsEmailValid(false);
+  const moveOn = (email)=> {
+    if(email==''){
+      setIsEmailVerified(false)
+    }else{
+      setIsEmailVerified(true)  
+
     }
-  };
+  }
   //Clear user input
   const clearSignup = () => {
     setSignupName('');
@@ -123,7 +121,7 @@ function App() {
       setSigninPostError(null);
       setCurrentUser(data)
     } catch (err) {
-      setSignupPostError(err.message);
+      setSigninPostError(err.message);
       setIsLoading(false);
     }
   };
@@ -154,9 +152,10 @@ function App() {
                   setLoginPassword={setLoginPassword}
                   isEmailVerified={isEmailVerified}
                   setIsEmailVerified={setIsEmailVerified}
-                  validateEmail={validateEmail}
-                  isEmailValid={isEmailValid}
+                  moveOn={moveOn}
                   signin={signin}
+                  signinPostError={signinPostError}
+              
                 />
               )
             }

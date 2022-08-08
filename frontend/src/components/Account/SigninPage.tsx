@@ -14,10 +14,10 @@ function SigninPage({
   loginPassword,
   setLoginPassword,
   isEmailVerified,
-  validateEmail,
   setIsEmailVerified,
-  isEmailValid,
-  signin
+  moveOn,
+  signin,
+  signinPostError
 }) {
   return isEmailVerified ? (
     <SigninPassword
@@ -25,13 +25,14 @@ function SigninPage({
       loginPassword={loginPassword}
       setLoginPassword={setLoginPassword}
       signin={signin}
+      signinPostError={signinPostError}
+
     />
   ) : (
     <SigninEmail
       loginEmail={loginEmail}
       setLoginEmail={setLoginEmail}
-      validateEmail={validateEmail}
-      isEmailValid={isEmailValid}
+      moveOn={moveOn}
     />
   );
 }

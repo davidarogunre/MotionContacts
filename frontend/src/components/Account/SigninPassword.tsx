@@ -17,37 +17,43 @@ function SigninPassword({
   setIsEmailVerified,
   loginPassword,
   setLoginPassword,
-  signin
+  signin,
+  signinPostError
 }) {
   const [passwordType, setPasswordType] = useState(true);
   return (
     <Box
       fontFamily="Open Sans"
-      width="450px"
+      width={{base:"330px", md:"450px"}}
       height="500px"
       border="0.12rem solid whitesmoke"
       borderRadius="5px"
       margin="50px auto 0 auto"
     >
-      <Image src={logo} width="100px" margin="40px 0 0 170px" />
-      <Text margin="5px 0 0 172px" fontSize="2rem">
+      <Image src={logo} width="100px" margin="35px auto 0 auto" />
+      <Text textAlign="center" fontSize="2rem" marginTop="6px">
         Sign in
       </Text>
-      <Text margin="15px 0 0 125px" fontSize="1.2rem">
+      <Text textAlign="center" fontSize="1.2rem" marginTop="10px">
         Use your Motion Account
       </Text>
-      <Box width="80%" margin="0 auto">
+      <Box width="100%" margin="0 auto">
+        <form onSubmit={(e)=>{
+          e.preventDefault()
+          signin()
+        }}>
+
         <FormControl
           variant="floating"
           id="password"
-          width="50%"
-          margin="30px 20px 0 0"
+          width="90%"
+          margin="30px auto"
         >
           <Input
             type={passwordType ? 'password' : 'text'}
             placeholder=" "
             borderRadius="3px"
-            width="370px"
+            width="100%"
             padding="25px 15px"
             value={loginPassword}
             onChange={e => setLoginPassword(e.target.value)}
@@ -56,10 +62,11 @@ function SigninPassword({
           <FormLabel paddingTop="7px" fontWeight="100">
             Password
           </FormLabel>
+          {/* 50px without error */}
           <Box
             display="flex"
             justifyContent="space-between"
-            width="370px"
+            width="100%"
             marginTop="130px"
           >
             <Button
@@ -71,17 +78,21 @@ function SigninPassword({
               Back
             </Button>
 
-            <Button colorScheme="blue" borderRadius="5px" variant="solid" onClick={signin}>
+            <Button type="submit" colorScheme="blue" borderRadius="5px" variant="solid">
               Next
             </Button>
           </Box>
         </FormControl>
+        </form>
+        <Box width="100%" marginLeft={{base:"20px", md:"35px"}}>
+        {/* -210px with err */}
         <Checkbox
-          transform="translateY(-150px)"
+          transform="translateY(-180px)"
           onChange={() => setPasswordType(!passwordType)}
         >
           Show Password
         </Checkbox>
+        </Box>
       </Box>
     </Box>
   );
