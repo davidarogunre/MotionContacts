@@ -20,7 +20,7 @@ function Intro() {
 
         </Box>
         <Spacer/>
-        <Image src={illustration} backgroundColor="orange" width={{base:"45%", "2xl":"40%"}} height={{md:"40vw", '2xl':"35vw"}}/>
+        <Image src={illustration} backgroundColor="orange" width={{base:"45%", "2xl":"900px"}} height={{md:"40vw", '2xl':"900px"}}/>
     </Flex>
   )
 }
