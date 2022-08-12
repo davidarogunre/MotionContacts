@@ -6,9 +6,9 @@ import '@fontsource/roboto/100.css'
 
 function Intro() {
   return (
-    <Flex padding="0" width="90%" margin="50px auto 0 auto" height="500px" alignItems="center">
+    <Flex padding="0" width="90%" margin="40px auto 0 auto" height="500px" alignItems="center">
         <Box backgroundColor="white" width="50%" height="250px" fontFamily="Roboto" fontWeight="400">
-          <Box fontSize={{base:"40px", md:"50px", xl:"60px"}} id="header">
+          <Box fontSize={{base:"40px", md:"50px", xl:"60px"}} id="header" width="110%">
             MotionContacts
           </Box>
           <Box id="desc" width={{md:"100%", xl:"70%"}} fontWeight="100" marginTop="10px">
@@ -20,7 +20,7 @@ function Intro() {
 
         </Box>
         <Spacer/>
-        <Image src={illustration} backgroundColor="orange" width="45%" height="40vw"/>
+        <Image src={illustration} backgroundColor="orange" width={{base:"45%", "2xl":"500px"}} height={{md:"40vw", '2xl':"500px"}}/>
     </Flex>
   )
 }
