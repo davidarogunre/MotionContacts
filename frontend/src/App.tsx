@@ -7,7 +7,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
-// import Home from './components/Home/Home';
+import Home from './components/Home/Home';
 import SigninPage from './components/Account/SigninPage';
 import ContactPage from './components/Contact/ContactPage';
 import CreateContact from './components/Contact/CreateContact';
@@ -131,13 +131,7 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              isCurrentUser ? (
-                <Navigate replace to="/" />
-              ) : (
-                <Navigate replace to="/signin" />
-              )
-            }
+            element={<Home/>}
           />
           <Route
             path="/signin"

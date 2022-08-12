@@ -1,9 +1,14 @@
 import React from 'react'
 import Navbar from './Navbar'
+import Intro from './Intro'
+import { Box } from '@chakra-ui/react';
 
 function Home() {
   return (
-    <div>Home</div>
+    <Box>
+      <Navbar/>
+      <Intro/>
+    </Box>
   )
 }
 
