@@ -6,7 +6,7 @@ import '@fontsource/roboto/100.css'
 
 function Intro() {
   return (
-    <Flex padding="0" width="90%" margin={{base:"40px auto 0 auto", "2xl":"100px auto 0 auto"}} height="500px" alignItems="center">
+    <Flex padding="0" width="90%" margin={{base:"40px auto 0 auto", "2xl":"200px auto 0 auto"}} height="500px" alignItems="center">
         <Box backgroundColor="white" width="50%" height="250px" fontFamily="Roboto" fontWeight="400">
           <Box fontSize={{base:"40px", md:"50px", xl:"60px"}} id="header" width="110%">
             MotionContacts
