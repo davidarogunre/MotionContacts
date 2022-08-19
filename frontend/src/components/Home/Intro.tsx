@@ -2,7 +2,7 @@ import React from 'react'
 import {Box, Flex, Spacer, Image, Button} from '@chakra-ui/react';
 import illustration from './image.jpg'
 import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/100.css'
+import '@fontsource/roboto/300.css'
 
 function Intro() {
   return (
@@ -11,13 +11,13 @@ function Intro() {
           <Box fontSize={{base:"40px", md:"50px", xl:"70px"}} id="header" width="110%" textAlign={{base:"center", md:"initial"}}>
             MotionContacts
           </Box>
-          <Box id="desc" width={{md:"100%", xl:"70%"}} fontWeight="100" marginTop="10px" textAlign={{base:"center", md:"initial"}}>
+          <Box id="desc" width={{md:"100%", xl:"70%"}} fontSize="19px" fontWeight="300" marginTop="10px" textAlign={{base:"center", md:"initial"}}>
               Looking for a better contacts apps, MotionContacts is here.
               MotionContacts is the best contacts app to suit your needs packed
               with features you never knew existed and very fast.
           </Box>
           <Box display={{base:"flex", md:"block"}} justifyContent={{base:"center"}}>
-          <Button colorScheme="blue" borderRadius="5px" variant="solid" marginTop={{base:"24px", md:"25px"}}>Register</Button>
+          <Button colorScheme="blue" borderRadius="5px" variant="solid" marginTop={{base:"8px", md:"25px"}}>Register</Button>
           </Box>
         </Box>
         <Spacer/>
