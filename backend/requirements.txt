@@ -1,7 +1,7 @@
 fastapi[all]
 passlib
 sqlalchemy
-psycopg2
+psycopg2-binary
 python-jose
 datetime
 python-dotenv
