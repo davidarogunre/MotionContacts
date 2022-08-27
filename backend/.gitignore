@@ -1,7 +1,2 @@
-.env
-/bin
-/include
-/lib
-/lib64
-pyvenv.cfg
 /venv
+.env
