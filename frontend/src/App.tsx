@@ -5,16 +5,17 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
+  useNavigate,
 } from 'react-router-dom';
 import Home from './components/Home/Home';
 import SigninPage from './components/Account/SigninPage';
 import ContactPage from './components/Contact/ContactPage';
 import CreateContact from './components/Contact/CreateContact';
 import Signup from './components/Account/SignupPage'
+import Dashboard from './components/Dashboard/Dashboard';
 import theme from './theme'
 import { useState } from 'react';
-
+import Cookies from 'js-cookie'
 import Loading from './components/Loading/Loading';
 function App() {
   //states for management of info
@@ -57,7 +58,7 @@ function App() {
   };
   const getCurrentUser = async () =>{
     try{
-      let response = await fetch("https://motioncontacts-production.up.railway.app/users/me")
+      let response = await fetch("http://localhost:8000/users/me")
       if(!response.ok){
         throw Error("There was a problem in logging in")
       }
@@ -82,7 +83,7 @@ function App() {
     };
     if (validatePassword(signupPassword, signupConfirmPassword)) {
       try {
-        let response = await fetch('https://motioncontacts-production.up.railway.app/users/', POST);
+        let response = await fetch('http://localhost:8000/users/', POST);
 
         if (!response.ok) {
           throw Error('There was a problem in logging in');
@@ -100,31 +101,29 @@ function App() {
 
   const signin = async () => {
     setIsLoading(true);
-    let data = {
-      username: loginEmail,
-      password: loginPassword,
-    };
+
     let POST = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: JSON.stringify(`grant_type=&username=${data.username}&password=${data.password}&scope=&client_id=&client_secret=`)
+      body: JSON.stringify(`grant_type=&username=${loginEmail}&password=${loginPassword}&scope=&client_id=&client_secret=`)
     };
     try {
-      let response = await fetch('https://motioncontacts-production.up.railway.app/token', POST);
+      let response = await fetch('http://localhost:8000/token', POST);
+      let value = await response.json()
       if (!response.ok) {
-        throw Error("There was a problem in connecting");
+        throw Error("Incorret username or password");
       }
-      console.log(response)
+      Cookies.set("token", value["access_token"])
+      setSigninPostError("Incorrect username and password")
       setIsLoading(false);
-      setSigninPostError(null);
-      setCurrentUser(data)
     } catch (err) {
+      Cookies.remove("token")
       setSigninPostError(err.message);
       setIsLoading(false);
     }
-  };
+  }
   return (
     <ChakraProvider theme={theme}>
       <Router>
@@ -176,7 +175,7 @@ function App() {
               )
             }
           />
-          <Route path="/contact/:id" element={<ContactPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/newcontact" element={<CreateContact/>} />
         </Routes>
       </Router>

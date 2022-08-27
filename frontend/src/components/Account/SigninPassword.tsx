@@ -13,13 +13,17 @@ import {
 } from '@chakra-ui/react';
 import '@fontsource/open-sans/400.css';
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
+import Cookies from 'js-cookie'
 function SigninPassword({
   setIsEmailVerified,
+  loginEmail,
   loginPassword,
   setLoginPassword,
   signin,
   signinPostError
 }) {
+  let navigate = useNavigate()
   const [passwordType, setPasswordType] = useState(true);
   return (
     <Box
@@ -38,10 +42,13 @@ function SigninPassword({
         Use your Motion Account
       </Text>
       <Box width="100%" margin="0 auto">
-        <form onSubmit={(e)=>{
+        <form onSubmit={async(e)=>{
           e.preventDefault()
-          signin()
-        }}>
+          await signin()
+          if (Cookies.get("token") !== null){
+            navigate("/dashboard")
+          }
+          }}>
 
         <FormControl
           variant="floating"

@@ -22,6 +22,7 @@ function SigninPage({
   return isEmailVerified ? (
     <SigninPassword
       setIsEmailVerified={setIsEmailVerified}
+      loginEmail = {loginEmail}
       loginPassword={loginPassword}
       setLoginPassword={setLoginPassword}
       signin={signin}
