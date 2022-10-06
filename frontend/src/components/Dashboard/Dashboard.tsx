@@ -2,6 +2,8 @@ import React from 'react'
 import Cookies from 'js-cookie'
 import {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom"
+import {Box} from "@chakra-ui/react"
+import Navbar from "./Navbar"
 
 interface User{
   name?:string
@@ -44,7 +46,10 @@ function Dashboard() {
         })
   },[])
   return (
-    <div>{user.email}</div>
+    <Box>
+      <Navbar user = {user}/>
+      
+      </Box>
   )
 }
 
