@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Button} from '@chakra-ui/react';
 import '@fontsource/roboto/400.css'
-
+import {Link} from "react-router-dom"
 function Navbar() {
   const listStyleRemove = {listStyle:"none"}
   return (
@@ -21,7 +21,7 @@ function Navbar() {
             </li>
         </Box>
         <Box width={{base:"150px", xl:"175px"}} display="flex" justifyContent="space-between" height="inherit" alignItems="center">
-            <Box>Login</Box>
+            <Box><Link to="/signin">Login</Link></Box>
             <Button colorScheme="blue" borderRadius="5px" variant="solid">Register</Button>
         </Box>
     </Box>

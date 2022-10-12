@@ -4,7 +4,8 @@ import {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom"
 import {Box} from "@chakra-ui/react"
 import Navbar from "./Navbar"
-
+import Title from "./Title"
+import Contacts from "./Contacts"
 interface User{
   name?:string
   email?:string
@@ -48,7 +49,8 @@ function Dashboard() {
   return (
     <Box>
       <Navbar user = {user}/>
-      
+      <Title/>
+      <Contacts/>
       </Box>
   )
 }

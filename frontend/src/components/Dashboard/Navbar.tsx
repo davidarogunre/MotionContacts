@@ -17,8 +17,8 @@ function Navbar({user}) {
           <Image src={logo}/>
           <Box fontSize="25px" fontFamily="Roboto" marginLeft="8px">Contacts</Box>
       </Box>
-      <Box marginTop="5px"><Input fontSize="17px" placeholder="Search" variant="filled" padding="25px 25px 25px 25px" width="45vw" maxWidth="700px"/></Box>
-      <Box>hey</Box>
+      <Box marginTop="5px"><Input fontSize="17px" placeholder="Search" variant="filled" padding="25px 25px 25px 25px" width="45vw" maxWidth="700px" display={{base:"none", md:"block"}}/></Box>
+      <Box>Avatar</Box>
     </Box>
   )
 }
