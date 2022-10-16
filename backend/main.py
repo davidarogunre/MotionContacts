@@ -98,12 +98,19 @@ def login_for_access_token(form_data: OAuth2PasswordRequestForm=Depends(), db: S
 def read_users_me(current_user: schemas.User= Depends(get_current_user)):
     print(current_user)
     return current_user
+    
 @app.post('/users/', response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_email(db, user.email)
     if db_user:
         raise HTTPException(status_code = 400, detail="Email already registered")
     return crud.create_user(db=db, user=user)
+
+@app.post('/users/{user_id}/item')
+def create_item(user_id:int, contact:schemas.ContactCreate, db: Session= Depends(get_db)):
+    return crud.create_user_contacts(db, contact, user_id)
+
+
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=int(os.environ.get("PORT")), log_level="info")

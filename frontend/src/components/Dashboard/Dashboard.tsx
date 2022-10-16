@@ -18,7 +18,7 @@ function Dashboard() {
   useEffect(()=>{
     let token = Cookies.get("token")
     if(token){
-        fetch("http://localhost:8000/users/me", {
+        fetch("https://motioncontactbackend.hop.sh/users/me", {
           method: "GET",
           headers:{
             "Content-Type": "application/json",
@@ -36,7 +36,7 @@ function Dashboard() {
 
   useEffect(()=>{
     let token = Cookies.get("token")
-    fetch("http://localhost:8000/users/me", {
+    fetch("https://motioncontactbackend.hop.sh/users/me", {
           method: "GET",
           headers:{
             "Content-Type": "application/json",

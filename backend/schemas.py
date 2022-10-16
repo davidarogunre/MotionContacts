@@ -4,6 +4,7 @@ from typing import Union
 class ContactBase(BaseModel):
     name: str
     email: str | None = None
+    phonenumber: str
 
 class ContactCreate(ContactBase):
     pass

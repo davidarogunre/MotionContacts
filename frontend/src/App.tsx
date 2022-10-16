@@ -58,7 +58,7 @@ function App() {
   };
   const getCurrentUser = async () =>{
     try{
-      let response = await fetch("http://localhost:8000/users/me")
+      let response = await fetch("https://motioncontactbackend.hop.sh/users/me")
       if(!response.ok){
         throw Error("There was a problem in logging in")
       }
@@ -83,7 +83,7 @@ function App() {
     };
     if (validatePassword(signupPassword, signupConfirmPassword)) {
       try {
-        let response = await fetch('http://localhost:8000/users/', POST);
+        let response = await fetch('https://motioncontactbackend.hop.sh/users/', POST);
 
         if (!response.ok) {
           throw Error('There was a problem in logging in');
@@ -110,7 +110,7 @@ function App() {
       body: JSON.stringify(`grant_type=&username=${loginEmail}&password=${loginPassword}&scope=&client_id=&client_secret=`)
     };
     try {
-      let response = await fetch('http://localhost:8000/token', POST);
+      let response = await fetch('https://motioncontactbackend.hop.sh/token', POST);
       let value = await response.json()
       if (!response.ok) {
         throw Error("Incorret username or password");

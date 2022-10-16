@@ -15,6 +15,7 @@ class Contacts(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     email = Column(String, unique=True, index=True)
+    phonenumber = Column(String)
     owner_id = Column(Integer, ForeignKey("users.id"))
     owner= relationship("User", back_populates="contacts")
 
