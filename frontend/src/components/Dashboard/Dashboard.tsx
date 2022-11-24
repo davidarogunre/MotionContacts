@@ -4,21 +4,14 @@ import {useState, useEffect} from "react"
 import {useNavigate} from "react-router-dom"
 import {Box} from "@chakra-ui/react"
 import Navbar from "./Navbar"
-import Title from "./Title"
 import Contacts from "./Contacts"
-interface User{
-  name?:string
-  email?:string
-  id?:number
-  contacts?:{}[]
-}
-function Dashboard() {
+
+function Dashboard({contacts, setContacts, CurrentUser, setCurrentUser}) {
   let navigate = useNavigate()
-  const [user, setUser] = useState<User>({})
   useEffect(()=>{
     let token = Cookies.get("token")
     if(token){
-        fetch("https://motioncontactbackend.hop.sh/users/me", {
+        fetch("https://motioncontactsbackend.hop.sh/users/me", {
           method: "GET",
           headers:{
             "Content-Type": "application/json",
@@ -29,6 +22,7 @@ function Dashboard() {
             navigate("/signin")
           }
         })
+
     }else{
       navigate("/signin")
     }
@@ -36,21 +30,21 @@ function Dashboard() {
 
   useEffect(()=>{
     let token = Cookies.get("token")
-    fetch("https://motioncontactbackend.hop.sh/users/me", {
+    fetch("https://motioncontactsbackend.hop.sh/users/me", {
           method: "GET",
           headers:{
             "Content-Type": "application/json",
             Authorization : "Bearer "+token
           }
         }).then(res=>res.json()).then((data)=>{
-          setUser(data)
+          setCurrentUser(data)
+          setContacts(data.contacts)
         })
   },[])
   return (
     <Box>
-      <Navbar user = {user}/>
-      <Title/>
-      <Contacts/>
+      <Navbar user = {CurrentUser}/>
+      <Contacts contacts={contacts}/>
       </Box>
   )
 }

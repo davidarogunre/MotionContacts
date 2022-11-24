@@ -1,8 +1,9 @@
 import React from 'react'
 import logo from "./favicon.png"
 import '@fontsource/roboto/400.css'
+import {Link} from 'react-router-dom'
 import {
-    Box, Image, Input
+    Box, Image, Input, Button
   } from '@chakra-ui/react';
   interface User{
     name?:string
@@ -18,7 +19,8 @@ function Navbar({user}) {
           <Box fontSize="25px" fontFamily="Roboto" marginLeft="8px">Contacts</Box>
       </Box>
       <Box marginTop="5px"><Input fontSize="17px" placeholder="Search" variant="filled" padding="25px 25px 25px 25px" width="45vw" maxWidth="700px" display={{base:"none", md:"block"}}/></Box>
-      <Box>Avatar</Box>
+      <Button colorScheme='blue' variant='solid'><Link to="/user/newcontact">Create Contact</Link></Button>
+      <Box>{user.name}</Box>
     </Box>
   )
 }

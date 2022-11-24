@@ -1,8 +1,0 @@
-fastapi[all]
-passlib
-sqlalchemy
-psycopg2-binary
-python-jose
-datetime
-python-dotenv
-PyMySQL

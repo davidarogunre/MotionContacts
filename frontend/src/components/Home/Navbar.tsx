@@ -9,17 +9,6 @@ function Navbar() {
         <Box width="10%" height="inherit" display="flex" alignItems="center" fontSize="25px">
             Logo
         </Box>
-        <Box width={{md:"350px", xl:"450px"}} display={{base:"none", md:"flex"}} justifyContent="space-between" height="inherit" alignItems="center" fontSize="19px">
-            <li style={listStyleRemove}>
-                Features
-            </li>
-            <li style={listStyleRemove}>
-                How it works
-            </li>
-            <li style={listStyleRemove}>
-                Pricing
-            </li>
-        </Box>
         <Box width={{base:"150px", xl:"175px"}} display="flex" justifyContent="space-between" height="inherit" alignItems="center">
             <Box><Link to="/signin">Login</Link></Box>
             <Button colorScheme="blue" borderRadius="5px" variant="solid">Register</Button>

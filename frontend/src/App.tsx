@@ -1,11 +1,9 @@
-import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate,
 } from 'react-router-dom';
 import Home from './components/Home/Home';
 import SigninPage from './components/Account/SigninPage';
@@ -17,12 +15,18 @@ import theme from './theme'
 import { useState } from 'react';
 import Cookies from 'js-cookie'
 import Loading from './components/Loading/Loading';
+interface User{
+  name?:string
+  email?:string
+  id?:number
+  contacts?:{}[]
+}
 function App() {
   //states for management of info
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
   const [isEmailVerified, setIsEmailVerified] = useState(false);
-  const [CurrentUser, setCurrentUser] = useState({});
+  const [CurrentUser, setCurrentUser] = useState<User>({});
   const [isCurrentUser, setIsCurrentUser] = useState(false)
   const [signupName, setSignupName] = useState('');
   const [signupEmail, setSignupEmail] = useState('');
@@ -32,10 +36,14 @@ function App() {
   const [signupPostError, setSignupPostError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [signinPostError, setSigninPostError] = useState(null);
+  const [contactName, setContactName] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [contactNumber, setContactNumber] = useState("")
+  const [contacts, setContacts] = useState([])
 
   //handle email validation
   const moveOn = (email)=> {
-    if(email==''){
+    if(email===''){
       setIsEmailVerified(false)
     }else{
       setIsEmailVerified(true)  
@@ -56,17 +64,6 @@ function App() {
       return false;
     }
   };
-  const getCurrentUser = async () =>{
-    try{
-      let response = await fetch("https://motioncontactbackend.hop.sh/users/me")
-      if(!response.ok){
-        throw Error("There was a problem in logging in")
-      }
-      let data = await response.json()
-    }catch(err){
-      setSignupPostError(err.message);
-    }
-  }
   const sendInfo = async () => {
     setIsLoading(true);
     let data = {
@@ -83,7 +80,7 @@ function App() {
     };
     if (validatePassword(signupPassword, signupConfirmPassword)) {
       try {
-        let response = await fetch('https://motioncontactbackend.hop.sh/users/', POST);
+        let response = await fetch('https://motioncontactsbackend.hop.sh/users/', POST);
 
         if (!response.ok) {
           throw Error('There was a problem in logging in');
@@ -110,13 +107,13 @@ function App() {
       body: JSON.stringify(`grant_type=&username=${loginEmail}&password=${loginPassword}&scope=&client_id=&client_secret=`)
     };
     try {
-      let response = await fetch('https://motioncontactbackend.hop.sh/token', POST);
+      let response = await fetch('https://motioncontactsbackend.hop.sh/token', POST);
       let value = await response.json()
       if (!response.ok) {
         throw Error("Incorret username or password");
       }
       Cookies.set("token", value["access_token"])
-      setSigninPostError("Incorrect username and password")
+      setSigninPostError(null)
       setIsLoading(false);
     } catch (err) {
       Cookies.remove("token")
@@ -124,6 +121,34 @@ function App() {
       setIsLoading(false);
     }
   }
+ const createContact = async () => {
+  setIsLoading(true);
+  let data = {
+    name: contactName,
+    email:contactEmail,
+    phonenumber:contactNumber
+  }
+  let POST = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': "*",
+    },
+    body:JSON.stringify(data)
+  }
+  try{
+    let response = await fetch(`https://motioncontactsbackend.hop.sh/users/${CurrentUser.id}/item`, POST)
+    if (!response.ok) {
+      throw Error("There was an issues in creating your contact. Please try again");
+  }
+  setIsLoading(false)
+  setSignupPostError(null)
+}catch(err){
+  setSignupPostError(err.message)
+  setIsLoading(false)
+}
+
+ }
   return (
     <ChakraProvider theme={theme}>
       <Router>
@@ -175,8 +200,8 @@ function App() {
               )
             }
           />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/newcontact" element={<CreateContact/>} />
+          <Route path="/dashboard" element={<Dashboard contacts={contacts} setContacts={setContacts} CurrentUser={CurrentUser} setCurrentUser={setCurrentUser}/>}/>
+          <Route path="/user/newcontact" element={<CreateContact createContact= {createContact} isLoading={isLoading} contactName={contactName} setContactName={setContactName} contactEmail={contactEmail} setContactEmail = {setContactEmail} contactNumber={contactNumber} setContactNumber={setContactNumber}/>} />
         </Routes>
       </Router>
     </ChakraProvider>

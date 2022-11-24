@@ -1,36 +1,26 @@
-import React from 'react'
-import {useState} from "react"
-import {Box} from "@chakra-ui/react"
+import Title from "./Title"
+import {
+  Table,
+  Tbody,
+  TableContainer,
+
+} from "@chakra-ui/react"
 import Contact from './Contact'
-function Contacts() {
-  const [contacts, setContacts] = useState([
-    {
-      id:1,
-      owner_id:1,
-      name:"David Arogunre",
-      email:"davidarogunre@gmail.com",
-      phonenumber:"08062389217"
-  },
-  {
-    id:2,
-    owner_id:2,
-    name:"Mary Arogunre",
-    email:"maryarogunre@gmail.com",
-    phonenumber:"08062389217"
-  }
-])
+function Contacts({contacts}) {
+
   return (
-    <Box>
+    <TableContainer width="95%" margin="0 auto">
+      <Table>
+        <Title/>
+        <Tbody>
       {contacts.map((contact)=>{
         return(
-          <Box>
-              <Contact contact={contact}/>
-              
-          </Box>
-          
+              <Contact key={contact.id} contact={contact}/>
         )
       })}
-    </Box>
+      </Tbody>
+      </Table>
+    </TableContainer>
   )
 }
 
