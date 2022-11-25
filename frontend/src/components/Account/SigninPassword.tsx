@@ -46,7 +46,19 @@ function SigninPassword({
           e.preventDefault()
           await signin()
           if (Cookies.get("token") !== null){
-            navigate("/dashboard")
+            fetch("https://motioncontactsbackend.hop.sh/users/me", {
+              method: "GET",
+              headers:{
+                "Content-Type": "application/json",
+                Authorization : "Bearer "+ Cookies.get("token")
+              }
+            }).then((res)=>{
+              if(res.status !== 200){
+                navigate("/signin")
+              }else{
+                navigate("/dashboard")
+              }
+            })
           }
           }}>
 
