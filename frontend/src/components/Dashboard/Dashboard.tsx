@@ -6,7 +6,7 @@ import {Box} from "@chakra-ui/react"
 import Navbar from "./Navbar"
 import Contacts from "./Contacts"
 
-function Dashboard({contacts, setContacts, CurrentUser, setCurrentUser}) {
+function Dashboard({contacts, setContacts, CurrentUser, setCurrentUser, deleteContact}) {
 
   useEffect(()=>{
     let token = Cookies.get("token")
@@ -24,7 +24,7 @@ function Dashboard({contacts, setContacts, CurrentUser, setCurrentUser}) {
   return (
     <Box>
       <Navbar user = {CurrentUser}/>
-      <Contacts contacts={contacts}/>
+      <Contacts contacts={contacts} deleteContact={deleteContact}/>
       </Box>
   )
 }

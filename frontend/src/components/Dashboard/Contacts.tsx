@@ -6,7 +6,7 @@ import {
 
 } from "@chakra-ui/react"
 import Contact from './Contact'
-function Contacts({contacts}) {
+function Contacts({contacts, deleteContact}) {
 
   return (
     <TableContainer width="95%" margin="0 auto">
@@ -15,7 +15,7 @@ function Contacts({contacts}) {
         <Tbody>
       {contacts.map((contact)=>{
         return(
-              <Contact key={contact.id} contact={contact}/>
+              <Contact key={contact.id} contact={contact} deleteContact = {deleteContact}/>
         )
       })}
       </Tbody>

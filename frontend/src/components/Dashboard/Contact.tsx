@@ -9,7 +9,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 
 
 
-function Contact({contact}) {
+function Contact({contact, deleteContact}) {
   let [backgroundColor, setBackgroundColor] = useState(false)
   return (
     <>
@@ -17,7 +17,7 @@ function Contact({contact}) {
         <Td>{contact.name}</Td>
         <Td>{contact.email}</Td>
         <Td>{contact.phonenumber}</Td>  
-        <Button visibility={backgroundColor? "visible": "hidden"} pos="relative" top="7px" right="0px"><AiOutlineDelete/></Button>
+        <Button onClick={()=>deleteContact(contact.id)} visibility={backgroundColor? "visible": "hidden"} pos="relative" top="7px" right="0px"><AiOutlineDelete/></Button>
     </Tr>
     </>
   )

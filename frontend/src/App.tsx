@@ -149,6 +149,22 @@ function App() {
 }
 
  }
+
+    const deleteContact = async(id) =>{
+      let DELETE = {
+        method:"DELETE"
+      } 
+      let newcontacts = contacts.filter((contact)=>contact.id !== id)
+      setContacts(newcontacts)
+        try {
+         let response = await fetch(`https://motioncontactsbackend.hop.sh/contacts/delete/${id}`, DELETE)
+         if (!response.ok){
+          throw Error("Attempt to delete contact has failed")
+         }
+        }catch(e){
+          console.log(e)
+        }
+    }
   return (
     <ChakraProvider theme={theme}>
       <Router>
@@ -200,7 +216,7 @@ function App() {
               )
             }
           />
-          <Route path="/dashboard" element={<Dashboard contacts={contacts} setContacts={setContacts} CurrentUser={CurrentUser} setCurrentUser={setCurrentUser}/>}/>
+          <Route path="/dashboard" element={<Dashboard contacts={contacts} setContacts={setContacts} CurrentUser={CurrentUser} setCurrentUser={setCurrentUser} deleteContact={deleteContact} />}/>
           <Route path="/user/newcontact" element={<CreateContact createContact= {createContact} isLoading={isLoading} contactName={contactName} setContactName={setContactName} contactEmail={contactEmail} setContactEmail = {setContactEmail} contactNumber={contactNumber} setContactNumber={setContactNumber}/>} />
         </Routes>
       </Router>
